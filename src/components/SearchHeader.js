@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { FaMicrophone } from "react-icons/fa";
 import { FaCamera } from "react-icons/fa";
@@ -12,6 +12,8 @@ import { IoIosArrowDown } from "react-icons/io";
 
 function SearchHeader() {
   const { term } = useParams();
+
+  const navigate = useNavigate();
 
   const [searchTerm, setSearchTerm] = useState(term);
 
@@ -28,7 +30,7 @@ function SearchHeader() {
             className="!h-30 !w-30 lg:!h-30 lg:!w-600"
           />
 
-          <div className="w-full lg:max-w-3xl rounded-full border border-grey-500 flex items-center justify-between p-3">
+          <form className="w-full lg:max-w-3xl rounded-full border border-grey-500 flex items-center justify-between p-3">
             <div className="flex items-center space-x-2 w-full lg:max-w-3xl">
               <input
                 value={searchTerm}
@@ -39,14 +41,14 @@ function SearchHeader() {
             </div>
 
             <div className="flex items-center space-x-5">
-              <button>
+              <button type="submit" onClick={() => navigate(`/${searchTerm}`)}>
                 <CiSearch className="h-5 w-5 text-black cursor-pointer" />
               </button>
               <FaMicrophone className="hidden lg:block lg:h-5 lg:w-5 text-black" />
 
               <FaCamera className="hidden lg:block lg:h-5 lg:w-5 text-black" />
             </div>
-          </div>
+          </form>
         </div>
 
         <div className="lg:flex items-center space-x-3 hidden">
